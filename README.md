@@ -21,12 +21,8 @@ Use `./ebpf_ic.py` with the following parameters to get a file (in the desired e
 
 1. Using `--hex` and `--apart`
 
-**input:** `add r0, 0x20`
-
-**output:** `0x14, 0x7`
+**input:** `add r0, 0x20`; **output:** `0x14, 0x7`
 
 2. Using `--bin` and `--unique`
 
-**input:** `add r0, 0x20`
-
-**output:** `0000000000000000000000000001010000000000000000000000000000000111`
+**input:** `add r0, 0x20`; **output:** `0000000000000000000000000001010000000000000000000000000000000111`
