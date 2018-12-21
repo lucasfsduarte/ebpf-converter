@@ -1,4 +1,8 @@
-lucas
-lucas
-lucas
-10
+// Codigo de exemplo
+
+neg r2
+mov r0, 0x101
+mov r1, r0
+add r2, r0
+add r2, r1
+//exit
