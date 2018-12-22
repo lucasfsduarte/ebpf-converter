@@ -1,8 +1,9 @@
 
 def writeOnFile(data, destiny):
     file = open(destiny, "w")
+    file.write(str(len(data)) + '\n')
     for line in data:
-        file.write(line)
+        file.write(line + '\n')
     file.close()
 
 def readFromFile(origin):

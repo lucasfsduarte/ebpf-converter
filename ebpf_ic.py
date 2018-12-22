@@ -10,9 +10,6 @@ from args import *
 from file import *
 from main import *
 
-data = ["lucas\n", "lucas\n", "lucas\n", "10\n"]
-
 info = validateArgs(sys.argv)
-# writeOnFile(data, info['outputFile'])
-# readFromFile(info['inputFile'])
-prepareInstructions(info['inputFile'])
+machineCode = processInstructions(info['inputFile'])
+writeInstructions(info, machineCode)

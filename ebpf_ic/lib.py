@@ -56,5 +56,10 @@ def isHexadecimal(inputString):
     hexdigits = ('0123456789abcdefABCDEF')
     return all(char in hexdigits for char in inputString)
 
+def apartInstruction(instruction, char):
+    inst_hi = instruction[0:32]
+    inst_lo = instruction[32:]
+    return inst_hi + char + inst_lo
+
 def perror(code=None, line=None, arg1=None, arg2=None):
     return None

@@ -1,9 +1,10 @@
+from lib import *
 from data import *
 from file import *
 from args import *
 from engine import *
 
-def prepareInstructions(inputFile):
+def processInstructions(inputFile):
 
     machineCode = []
     # Get all the instructions from external file:
@@ -28,4 +29,19 @@ def prepareInstructions(inputFile):
             machineCode.append(instr_set[op](op, args, index + 1))
         else: print("ebpf_ic: line " + str(index + 1) + ": unknown instruction")
 
-    print (machineCode)
+    return machineCode
+
+def writeInstructions(info, machineCode):
+
+        # Verify data integrity then send data to be written:
+        if not None in machineCode:
+            # If the parameter --apart is active:
+            if info['instructionType'] == 0:
+                apartedMachineCode = []
+                for instruction in machineCode:
+                    apartedMachineCode.append(apartInstruction(instruction, ','))
+                writeOnFile(apartedMachineCode, info['outputFile'])
+            else:
+                writeOnFile(machineCode, info['outputFile'])
+            return True
+        else: return False
