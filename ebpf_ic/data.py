@@ -32,7 +32,7 @@ reg_set = {
 }
 
 # eBPF x64 Instructions:
-x64_inst_set = {
+x64_x32_inst_set = {
     'add':  {'opcode': '00001111', 'opcodeImm': '00000111'},
     'sub':  {'opcode': '00011111', 'opcodeImm': '00010111'},
     'mul':  {'opcode': '00101111', 'opcodeImm': '00100111'},
@@ -45,24 +45,20 @@ x64_inst_set = {
     'mod':  {'opcode': '10011111', 'opcodeImm': '10010111'},
     'xor':  {'opcode': '10101111', 'opcodeImm': '10100111'},
     'mov':  {'opcode': '10111111', 'opcodeImm': '10110111'},
-    'arsh': {'opcode': '11001111', 'opcodeImm': '11000111'}
-}
-
-# eBPF X32 Instructions:
-x32_inst_set = {
+    'arsh': {'opcode': '11001111', 'opcodeImm': '11000111'},
     'add32': {'opcode': '00001100', 'opcodeImm': '00000100'},
-    'sub32': {'opcode': '00011100', 'opcodeImm': '00010100' },
-    'mul32': {'opcode': '00101100', 'opcodeImm': '00100100' },
-    'div32': {'opcode': '00111100', 'opcodeImm': '00110100' },
-    'or32': {'opcode': '01001100', 'opcodeImm': '01000100' },
-    'and32': {'opcode': '01011100', 'opcodeImm': '01010100' },
-    'lsh32': {'opcode': '01101100', 'opcodeImm': '01100100' },
-    'rsh32': {'opcode': '01111100', 'opcodeImm': '01110100' },
-    'neg32': {'opcode': '10000100', 'opcodeImm': '' },
-    'mod32': {'opcode': '10011100', 'opcodeImm': '10010100' },
-    'xor32': {'opcode': '10101100', 'opcodeImm': '10100100' },
-    'mov32': {'opcode': '10111100', 'opcodeImm': '10110100' },
-    'arsh32': {'opcode': '11001100', 'opcodeImm': '11000100' }
+    'sub32': {'opcode': '00011100', 'opcodeImm': '00010100'},
+    'mul32': {'opcode': '00101100', 'opcodeImm': '00100100'},
+    'div32': {'opcode': '00111100', 'opcodeImm': '00110100'},
+    'or32': {'opcode': '01001100', 'opcodeImm': '01000100'},
+    'and32': {'opcode': '01011100', 'opcodeImm': '01010100'},
+    'lsh32': {'opcode': '01101100', 'opcodeImm': '01100100'},
+    'rsh32': {'opcode': '01111100', 'opcodeImm': '01110100'},
+    'neg32': {'opcode': '10000100'},
+    'mod32': {'opcode': '10011100', 'opcodeImm': '10010100'},
+    'xor32': {'opcode': '10101100', 'opcodeImm': '10100100'},
+    'mov32': {'opcode': '10111100', 'opcodeImm': '10110100'},
+    'arsh32': {'opcode': '11001100', 'opcodeImm': '11000100'}
 }
 
 byteswap_inst_set = {
