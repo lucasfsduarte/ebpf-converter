@@ -26,6 +26,6 @@ def prepareInstructions(inputFile):
         # Execute the search and translation:
         if op in instr_set:
             machineCode.append(instr_set[op](op, args, index + 1))
-        else: print("not found")
+        else: print("ebpf_ic: line " + str(index + 1) + ": unknown instruction")
 
     print (machineCode)

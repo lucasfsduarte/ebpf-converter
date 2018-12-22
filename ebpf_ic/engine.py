@@ -153,6 +153,55 @@ def memory_inst (op, args, line):
         return None
     return inst.toString()
 
+def branch_inst (op, args, line):
+    inst = Instruction()
+    if len(args) == 3:
+        if isNumericDataValid(args[2]):
+            if isRegValid(args[0]):
+                if isRegValid(args[1]):
+                    inst.setSrc(reg_set[args[1]])
+                elif isNumericDataValid(args[1]):
+                    inst.setImm(completeBinary(dataTypeConversor(args[1]), 32))
+                else:
+                    print("ebpf_ic: line " + str(line) + ": invalid arguments")
+                    return None
+                inst.setDst(reg_set[args[0]])
+                inst.setOff(completeBinary(dataTypeConversor(args[2]), 16))
+                inst.setOpc(branch_inst_set[op]['opcode'])
+            else:
+                print("ebpf_ic: line " + str(line) + ": unknown register")
+                return None
+        else:
+            print("ebpf_ic: line " + str(line) + ": invalid offset")
+            return None
+    elif len(args) == 1:
+        if isNumericDataValid(args[0]):
+            if op == 'ja':
+                inst.setOff(completeBinary(dataTypeConversor(args[0]), 16))
+            elif op == 'call':
+                inst.setImm(completeBinary(dataTypeConversor(args[0]), 32))
+            inst.setOpc(branch_inst_set[op]['opcode'])
+        else:
+            print("ebpf_ic: line " + str(line) + ": invalid arguments")
+            return None
+    elif len(args) == 0:
+        if op == 'exit':
+            inst.setOpc(branch_inst_set[op]['opcode'])
+        else:
+            print("ebpf_ic: line " + str(line) + ": not enough arguments")
+            return None
+    elif len(args) > 3:
+        print("ebpf_ic: line " + str(line) + ": too many arguments")
+        return None
+    else:
+        if op == 'ja' or op == 'call':
+            print("ebpf_ic: line " + str(line) + ": too many arguments")
+            return None
+        else:
+            print("ebpf_ic: line " + str(line) + ": not enough arguments")
+            return None
+    return inst.toString()
+
 instr_set = {
     'neg'     : x64_x32_inst,
     'add'     : x64_x32_inst,
@@ -211,5 +260,20 @@ instr_set = {
     'stxw'    : memory_inst,
     'stxh'    : memory_inst,
     'stxb'    : memory_inst,
-    'stxdw'   : memory_inst
+    'stxdw'   : memory_inst,
+
+    'ja'      : branch_inst,
+    'jeq'     : branch_inst,
+    'jgt'     : branch_inst,
+    'jge'     : branch_inst,
+    'jlt'     : branch_inst,
+    'jle'     : branch_inst,
+    'jset'    : branch_inst,
+    'jne'     : branch_inst,
+    'jsgt'    : branch_inst,
+    'jsge'    : branch_inst,
+    'jslt'    : branch_inst,
+    'jsle'    : branch_inst,
+    'call'    : branch_inst,
+    'exit'    : branch_inst
 }

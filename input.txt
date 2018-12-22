@@ -1,5 +1,10 @@
 // Codigo de exemplo
 
+ja 0x010
+jeq r3, 0xaada, 0x01ab
+jeq r2, r5, 0x0abc
+jgt r1, r6, 0x0abcd
+call 0x4abb
 //le32 r2
 //be16 r3
 //lddw r2, 0x103a
@@ -13,4 +18,4 @@
 //mov r1, r0
 //add r2, r0
 //add r2, r1
-//exit
+exit
