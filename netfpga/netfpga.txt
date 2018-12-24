@@ -1,0 +1,580 @@
+mov32 r0, 0
+mov32 r1, 2
+add32 r0, 1
+add32 r0, r1
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 1
+mov32 r2, 2
+mov32 r3, 3
+mov32 r4, 4
+mov32 r5, 5
+mov32 r6, 6
+mov32 r7, 7
+mov32 r8, 8
+mov32 r9, 9
+
+add32 r0, 23
+add32 r0, r7
+
+sub32 r0, 13
+sub32 r0, r1
+
+mul32 r0, 7
+mul32 r0, r3
+
+div32 r0, 2
+div32 r0, r4
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 1
+mov32 r2, 2
+mov32 r3, 3
+mov32 r4, 4
+mov32 r5, 5
+mov32 r6, 6
+mov32 r7, 7
+mov32 r8, 8
+
+or32 r0, r5
+or32 r0, 0xa0
+
+and32 r0, 0xa3
+mov32 r9, 0x91
+and32 r0, r9
+
+lsh32 r0, 22
+lsh32 r0, r8
+
+rsh32 r0, 19
+rsh32 r0, r7
+
+xor32 r0, 0x03
+xor32 r0, r2
+
+exit
+
+//============================================
+
+mov r0, 0
+mov r1, 1
+mov r2, 2
+mov r3, 3
+mov r4, 4
+mov r5, 5
+mov r6, 6
+mov r7, 7
+mov r8, 8
+mov r9, 9
+
+add r0, 23
+add r0, r7
+
+sub r0, 13
+sub r0, r1
+
+mul r0, 7
+mul r0, r3
+
+div r0, 2
+div r0, r4
+
+exit
+
+//============================================
+
+mov r0, 0
+mov r1, 1
+mov r2, 2
+mov r3, 3
+mov r4, 4
+mov r5, 5
+mov r6, 6
+mov r7, 7
+mov r8, 8
+
+or r0, r5
+or r0, 0xa0
+
+and r0, 0xa3
+mov r9, 0x91
+and r0, r9
+
+lsh r0, 32
+lsh r0, 22
+lsh r0, r8
+
+rsh r0, 32
+rsh r0, 19
+rsh r0, r7
+
+xor r0, 0x03
+xor r0, r2
+
+exit
+
+//============================================
+
+mov32 r0, 0xf8
+mov32 r1, 16
+lsh32 r0, 28
+arsh32 r0, r1
+exit
+
+//============================================
+
+mov32 r0, 0xf8
+lsh32 r0, 28
+arsh32 r0, 16
+exit
+
+//============================================
+
+mov32 r0, 1
+lsh r0, 63
+arsh r0, 55
+mov32 r1, 5
+arsh r0, r1
+exit
+
+//============================================
+
+mov r0, 0xc
+lsh r0, 32
+div r0, 4
+exit
+
+//============================================
+
+mov r0, 0xc
+lsh r0, 32
+mov r1, 4
+div r0, r1
+exit
+
+//============================================
+
+mov r0, 3
+exit
+mov r0, 4
+exit
+
+//============================================
+
+mov32 r0, 1
+div32 r0, 0
+exit
+
+//============================================
+
+mov32 r0, 1
+mov32 r1, 0
+div32 r0, r1
+exit
+
+//============================================
+
+mov32 r0, 1
+mov32 r1, 0
+div r0, r1
+exit
+
+//============================================
+
+mov r0, 1
+ja +1
+mov r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0xa
+jeq r1, 0xb, +4
+
+mov32 r0, 1
+mov32 r1, 0xb
+jeq r1, 0xb, +1
+
+mov32 r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0xa
+mov32 r2, 0xb
+jeq r1, r2, +4
+
+mov32 r0, 1
+mov32 r1, 0xb
+jeq r1, r2, +1
+
+mov32 r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0xa
+jge r1, 0xb, +4
+
+mov32 r0, 1
+mov32 r1, 0xc
+jge r1, 0xb, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 5
+jgt r1, 6, +2
+jgt r1, 5, +1
+jgt r1, 4, +1
+exit
+mov32 r0, 1
+exit
+
+//============================================
+
+mov r0, 0
+mov r1, 5
+mov r2, 6
+mov r3, 4
+jgt r1, r2, +2
+jgt r1, r1, +1
+jgt r1, r3, +1
+exit
+mov r0, 1
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 5
+jle r1, 4, +1
+jle r1, 6, +1
+exit
+jle r1, 5, +1
+exit
+mov32 r0, 1
+exit
+
+//============================================
+
+mov r0, 0
+mov r1, 5
+mov r2, 4
+mov r3, 6
+jle r1, r2, +2
+jle r1, r1, +1
+exit
+jle r1, r3, +1
+exit
+mov r0, 1
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 5
+jlt r1, 4, +2
+jlt r1, 5, +1
+jlt r1, 6, +1
+exit
+mov32 r0, 1
+exit
+
+//============================================
+
+mov r0, 0
+mov r1, 5
+mov r2, 4
+mov r3, 6
+jlt r1, r2, +2
+jlt r1, r1, +1
+jlt r1, r3, +1
+exit
+mov r0, 1
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0xb
+mov32 r2, 0xb
+jne r1, r2, +4
+
+mov32 r0, 1
+mov32 r1, 0xa
+jne r1, r2, +1
+
+mov32 r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0x7
+jset r1, 0x8, +4
+
+mov32 r0, 1
+mov32 r1, 0x9
+jset r1, 0x8, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov32 r1, 0x7
+mov32 r2, 0x8
+jset r1, r2, +4
+
+mov32 r0, 1
+mov32 r1, 0x9
+jset r1, r2, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+jsge r1, 0xffffffff, +5
+jsge r1, 0, +4
+
+mov32 r0, 1
+mov r1, 0xffffffff
+jsge r1, 0xffffffff, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+mov r2, 0xffffffff
+mov32 r3, 0
+jsge r1, r2, +5
+jsge r1, r3, +4
+
+mov32 r0, 1
+mov r1, r2
+jsge r1, r2, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+jsgt r1, 0xffffffff, +4
+
+mov32 r0, 1
+mov32 r1, 0
+jsgt r1, 0xffffffff, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+mov r2, 0xffffffff
+jsgt r1, r2, +4
+
+mov32 r0, 1
+mov32 r1, 0
+jsgt r1, r2, +1
+
+mov32 r0, 2
+
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+jsle r1, 0xfffffffd, +1
+jsle r1, 0xffffffff, +1
+exit
+mov32 r0, 1
+jsle r1, 0xfffffffe, +1
+mov32 r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xffffffff
+mov r2, 0xfffffffe
+mov32 r3, 0
+jsle r1, r2, +1
+jsle r1, r3, +1
+exit
+mov32 r0, 1
+mov r1, r2
+jsle r1, r2, +1
+mov32 r0, 2
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+jslt r1, 0xfffffffd, +2
+jslt r1, 0xfffffffe, +1
+jslt r1, 0xffffffff, +1
+exit
+mov32 r0, 1
+exit
+
+//============================================
+
+mov32 r0, 0
+mov r1, 0xfffffffe
+mov r2, 0xfffffffd
+mov r3, 0xffffffff
+jslt r1, r1, +2
+jslt r1, r2, +1
+jslt r1, r3, +1
+exit
+mov32 r0, 1
+exit
+
+//============================================
+
+mov r0, 0x1
+mov r7, 4
+lsh r0, r7
+exit
+
+//============================================
+
+mov32 r0, 5748
+mod32 r0, 92
+
+mov32 r1, 13
+mod32 r0, r1
+
+exit
+
+//============================================
+
+mov32 r1, 1
+mov32 r0, r1
+exit
+
+//============================================
+
+//mov r0, 0x7
+//add r1, 0xa
+//lsh r1, 0x20
+//rsh r1, 0x20
+//jeq r1, 0x0, +4
+//mov r0, 0x7
+//mul r0, 0x7
+//add r1, 0xffffffff
+//jne r1, 0x0, -3
+//exit
+
+//============================================
+
+mov r0, 3
+mul32 r0, 4
+exit
+
+//============================================
+
+mov r0, 0x40000001
+mov r1, 4
+mul32 r0, r1
+exit
+
+//============================================
+
+mov r0, 3
+mov r1, 4
+mul32 r0, r1
+exit
+
+//============================================
+
+mov r0, 0x40000001
+mul r0, 4
+exit
+
+//============================================
+
+mov r0, 0x40000001
+mov r1, 4
+mul r0, r1
+exit
+
+//============================================
+
+mov32 r0, 2
+neg32 r0
+exit
+
+//============================================
+
+mov32 r0, 2
+neg r0
+exit
+
+//============================================
+
+//mov r1, 67
+//mov r0, 0x1
+//mov r2, 0x2
+//jgt r1, 0x2, +4
+//ja +10
+//add r2, 0x1
+//mov r0, 0x1
+//jge r2, r1, +7
+//mov r3, r1
+//div r3, r2
+//mul r3, r2
+//mov r4, r1
+//sub r4, r3
+//mov r0, 0x0
+//jne r4, 0x0, -10
+//exit
+
+//============================================
+
+mov r0, 0x10
+mov r7, 4
+rsh r0, r7
+exit
+
+//============================================
+
+xor r0, r0
+sub r0, 1
+rsh32 r0, 8
+exit
+
+//============================================

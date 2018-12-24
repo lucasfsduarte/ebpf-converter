@@ -53,14 +53,12 @@ def dataTypeConversor(data):
         None
     """
 
-    if data.startswith('-'): negative = 1; data = data.replace('-', '')
-    else: negative = 0
+    if data.startswith('-'): data = data.replace('-', '')
+    elif data.startswith('+'): data = data.replace('+', '')
 
     if data.startswith("0x"): converted = bin(int(data[2:], 16))[2:]
     elif data.startswith("0b"): converted = data[2:]
     else: converted = bin(int(data, 10))[2:]
-
-    if negative: converted[0] = 1
 
     return converted
 
@@ -95,6 +93,7 @@ def isNumericDataValid(data):
     """
 
     if data.startswith("-"): data = data.replace('-', '')
+    if data.startswith("+"): data = data.replace('+', '')
     if data.startswith("0x"): return isHexadecimal(data[2:])
     elif data.startswith("0b"): return isBinary(data[2:])
     else: return data.isdigit()

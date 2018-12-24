@@ -29,8 +29,8 @@ def writeOnFile(data, destiny):
         None
     """
 
-    file = open(destiny, "w")
-    file.write(transformHex(completeBinary(bin(len(data)), 32)) + '\n')
+    file = open("netfpga/nfpga/" + destiny, "w")
+    file.write(transformHex(completeBinary(bin(len(data))[2:], 32)) + '\n')
     for line in data:
         file.write(line + '\n')
     file.close()

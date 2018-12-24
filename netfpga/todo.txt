@@ -1,0 +1,4 @@
+-- verificar que em [a+b] no acesso de memoria o + faz parte do valor, e pode
+ser menos. dar suporte para isso
+
+-- offsets e valores negativos
