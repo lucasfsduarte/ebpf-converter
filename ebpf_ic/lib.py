@@ -61,5 +61,15 @@ def apartInstruction(instruction, char):
     inst_lo = instruction[32:]
     return inst_hi + char + inst_lo
 
+def transformHex(string):
+    hexStr = '0x'
+    hexHlf = ''
+    for i in range(0, len(string)):
+        hexHlf += string[i]
+        if (i + 1) % 4 == 0:
+            hexStr += hex(int(hexHlf, 2))[2:]
+            hexHlf = ''
+    return hexStr
+
 def perror(code=None, line=None, arg1=None, arg2=None):
     return None

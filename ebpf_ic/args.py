@@ -11,7 +11,7 @@ def validateArgs(args):
 
     # Initial info dictionary:
     backArgs = {
-        'outputDataType': 0, 'instructionType': 0,
+        'hexadecimal': True, 'aparted': True,
         'inputFile': '', 'outputFile': ''
     }
 
@@ -22,9 +22,9 @@ def validateArgs(args):
     # Identifying parameters:
     for p in parameters:
         if p in args_set['data']:
-            backArgs['outputDataType'] = args_set['data'][p]['value']
+            backArgs['hexadecimal'] = args_set['data'][p]['value']
         elif p in args_set['instruction']:
-            backArgs['instructionType'] = args_set['instruction'][p]['value']
+            backArgs['aparted'] = args_set['instruction'][p]['value']
         else:
             print("ebpf_ic: error: unknown parameter: " + p)
             helpArgs()

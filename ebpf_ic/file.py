@@ -1,7 +1,9 @@
+from lib import *
 
 def writeOnFile(data, destiny):
+    from lib import transformHex
     file = open(destiny, "w")
-    file.write(str(len(data)) + '\n')
+    file.write(transformHex(completeBinary(bin(len(data)), 32)) + '\n')
     for line in data:
         file.write(line + '\n')
     file.close()

@@ -32,16 +32,37 @@ def processInstructions(inputFile):
     return machineCode
 
 def writeInstructions(info, machineCode):
+        
+        finalMachineCode = []
+        apart = info['aparted']
+        hexa = info['hexadecimal']
 
         # Verify data integrity then send data to be written:
         if not None in machineCode:
-            # If the parameter --apart is active:
-            if info['instructionType'] == 0:
-                apartedMachineCode = []
-                for instruction in machineCode:
-                    apartedMachineCode.append(apartInstruction(instruction, ','))
-                writeOnFile(apartedMachineCode, info['outputFile'])
-            else:
-                writeOnFile(machineCode, info['outputFile'])
+
+            # --apart and --hex:
+            if apart and hexa:
+                for inst in machineCode:
+                    i = []
+                    i.append(inst[0:32])
+                    i.append(inst[32:])
+                    finalMachineCode.append(transformHex(i[0]) + ',' + transformHex(i[1]))
+
+            # --apart and --bin:
+            elif apart and not hexa:
+                for inst in machineCode:
+                    finalMachineCode.append(apartInstruction(inst, ','))
+
+            # --unique and --hex:
+            elif not apart and hexa:
+                for inst in machineCode:
+                    finalMachineCode.append(transformHex(inst))
+
+            # --unique and --bin:
+            elif not apart and not hexa:
+                for inst in machineCode:
+                    finalMachineCode = machineCode
+
+            writeOnFile(finalMachineCode, info['outputFile'])
             return True
         else: return False

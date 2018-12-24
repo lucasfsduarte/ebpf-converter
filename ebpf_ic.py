@@ -11,5 +11,6 @@ from file import *
 from main import *
 
 info = validateArgs(sys.argv)
-machineCode = processInstructions(info['inputFile'])
-writeInstructions(info, machineCode)
+if info != None:
+    machineCode = processInstructions(info['inputFile'])
+    writeInstructions(info, machineCode)
