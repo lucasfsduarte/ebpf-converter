@@ -1,10 +1,37 @@
-from lib import *
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *  File:
+# *        main.py
+# *
+# *  Library:
+# *        ebpf_ic/
+# *
+# *  Author:
+# *        Lucas Duarte (lucas.f.duarte@ufv.br)
+# *
+# *  Description:
+# *        Main file
+# *
+
+from engine import *
 from data import *
 from file import *
 from args import *
-from engine import *
+from lib import *
 
 def processInstructions(inputFile):
+    """
+    Receives instructions from an external input file and send it to translation.
+
+    Args:
+        inputFile: external input file.
+
+    Returns:
+        machineCode: a list with all the translated instructions in binary
+        machine code.
+
+    Raises:
+        None
+    """
 
     machineCode = []
     # Get all the instructions from external file:
@@ -32,37 +59,50 @@ def processInstructions(inputFile):
     return machineCode
 
 def writeInstructions(info, machineCode):
-        
-        finalMachineCode = []
-        apart = info['aparted']
-        hexa = info['hexadecimal']
+    """
+    Prepare all the instructions based on the arguments and send it to be written.
 
-        # Verify data integrity then send data to be written:
-        if not None in machineCode:
+    Args:
+        info: parameters obtained from command line;
+        machineCode: data to be analyzed and written.
 
-            # --apart and --hex:
-            if apart and hexa:
-                for inst in machineCode:
-                    i = []
-                    i.append(inst[0:32])
-                    i.append(inst[32:])
-                    finalMachineCode.append(transformHex(i[0]) + ',' + transformHex(i[1]))
+    Returns:
+        boolean: true if the data could be written; false if not.
 
-            # --apart and --bin:
-            elif apart and not hexa:
-                for inst in machineCode:
-                    finalMachineCode.append(apartInstruction(inst, ','))
+    Raises:
+        None
+    """
 
-            # --unique and --hex:
-            elif not apart and hexa:
-                for inst in machineCode:
-                    finalMachineCode.append(transformHex(inst))
+    finalMachineCode = []
+    apart = info['aparted']
+    hexa = info['hexadecimal']
 
-            # --unique and --bin:
-            elif not apart and not hexa:
-                for inst in machineCode:
-                    finalMachineCode = machineCode
+    # Verify data integrity then send data to be written:
+    if not None in machineCode:
 
-            writeOnFile(finalMachineCode, info['outputFile'])
-            return True
-        else: return False
+        # --apart and --hex:
+        if apart and hexa:
+            for inst in machineCode:
+                i = []
+                i.append(inst[0:32])
+                i.append(inst[32:])
+                finalMachineCode.append(transformHex(i[0]) + ',' + transformHex(i[1]))
+
+        # --apart and --bin:
+        elif apart and not hexa:
+            for inst in machineCode:
+                finalMachineCode.append(apartInstruction(inst, ','))
+
+        # --unique and --hex:
+        elif not apart and hexa:
+            for inst in machineCode:
+                finalMachineCode.append(transformHex(inst))
+
+        # --unique and --bin:
+        elif not apart and not hexa:
+            for inst in machineCode:
+                finalMachineCode = machineCode
+
+        writeOnFile(finalMachineCode, info['outputFile'])
+        return True
+    else: return False

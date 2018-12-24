@@ -1,8 +1,36 @@
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *  File:
+# *        engine.py
+# *
+# *  Library:
+# *        ebpf_ic/
+# *
+# *  Author:
+# *        Lucas Duarte (lucas.f.duarte@ufv.br)
+# *
+# *  Description:
+# *        Conversion and translation methods
+# *
+
+from Instruction import *
 from data import *
 from lib import *
-from Instruction import *
 
 def x64_x32_inst (op, args, line):
+    """
+    Converts x64 and x32 type instructions.
+
+    Args:
+        args: the operation (eg. mov), a list of arguments (eg. r0, r2) and the
+        correspondent line on input file.
+
+    Returns:
+        instruction: instruction converted into machine code.
+
+    Raises:
+        None
+    """
+
     inst = Instruction()
     if len(args) == 2 and op != 'neg' and op != 'neg32':
         if isRegValid(args[0]) and not isRegValid(args[1]):
@@ -42,15 +70,29 @@ def x64_x32_inst (op, args, line):
     return inst.toString()
 
 def byteswap_inst (op, args, line):
+    """
+    Converts byteswap type instructions.
+
+    Args:
+        args: the operation, a list of arguments and the correspondent line on
+        input file.
+
+    Returns:
+        instruction: instruction converted into machine code.
+
+    Raises:
+        None
+    """
 
     inst = Instruction()
-
     if len(args) > 1:
         print("ebpf_ic: line " + str(line) + ": too many arguments")
         return None
+
     elif len(args) < 1:
         print("ebpf_ic: line " + str(line) + ": not enough arguments")
         return None
+
     else:
         if isRegValid(args[0]):
             inst.setDst(reg_set[args[0]])
@@ -62,6 +104,20 @@ def byteswap_inst (op, args, line):
     return inst.toString()
 
 def memory_inst (op, args, line):
+    """
+    Converts memory access type instructions.
+
+    Args:
+        args: the operation, a list of arguments and the correspondent line on
+        input file.
+
+    Returns:
+        instruction: instruction converted into machine code.
+
+    Raises:
+        None
+    """
+
     inst = Instruction()
     if len(args) == 2:
         if op == 'lddw':
@@ -94,6 +150,7 @@ def memory_inst (op, args, line):
                 else:
                     print("ebpf_ic: line " + str(line) + ": unknown register")
                     return None
+
             elif not isRegValid(args[0]) and isRegValid(args[1]):
                 memoryArgs = isMemoryAccessValid(args[0])
                 if memoryArgs == None:
@@ -111,6 +168,7 @@ def memory_inst (op, args, line):
                 else:
                     print("ebpf_ic: line " + str(line) + ": unknown register")
                     return None
+
             elif not isRegValid(args[0]) and not isRegValid(args[1]):
                 memoryArgs = isMemoryAccessValid(args[0])
                 if memoryArgs == None:
@@ -132,6 +190,7 @@ def memory_inst (op, args, line):
                 else:
                     print("ebpf_ic: line " + str(line) + ": unknown register")
                     return None
+
     elif len(args) == 3:
         if isRegValid(args[0]) and isRegValid(args[1]):
             if isNumericDataValid(args[2]):
@@ -145,15 +204,31 @@ def memory_inst (op, args, line):
         else:
             print("ebpf_ic: line " + str(line) + ": unknown register")
             return None
+
     elif len(args) > 3:
         print("ebpf_ic: line " + str(line) + ": too many arguments")
         return None
+
     else:
         print("ebpf_ic: line " + str(line) + ": not enough arguments")
         return None
     return inst.toString()
 
 def branch_inst (op, args, line):
+    """
+    Converts branch type instructions.
+
+    Args:
+        args: the operation, a list of arguments and the correspondent line on
+        input file.
+
+    Returns:
+        instruction: instruction converted into machine code.
+
+    Raises:
+        None
+    """
+
     inst = Instruction()
     if len(args) == 3:
         if isNumericDataValid(args[2]):
@@ -174,6 +249,7 @@ def branch_inst (op, args, line):
         else:
             print("ebpf_ic: line " + str(line) + ": invalid offset")
             return None
+
     elif len(args) == 1:
         if isNumericDataValid(args[0]):
             if op == 'ja':
@@ -184,15 +260,18 @@ def branch_inst (op, args, line):
         else:
             print("ebpf_ic: line " + str(line) + ": invalid arguments")
             return None
+
     elif len(args) == 0:
         if op == 'exit':
             inst.setOpc(branch_inst_set[op]['opcode'])
         else:
             print("ebpf_ic: line " + str(line) + ": not enough arguments")
             return None
+
     elif len(args) > 3:
         print("ebpf_ic: line " + str(line) + ": too many arguments")
         return None
+
     else:
         if op == 'ja' or op == 'call':
             print("ebpf_ic: line " + str(line) + ": too many arguments")
@@ -202,6 +281,7 @@ def branch_inst (op, args, line):
             return None
     return inst.toString()
 
+# List of available instructions and its correspondent translation methods
 instr_set = {
     'neg'     : x64_x32_inst,
     'add'     : x64_x32_inst,

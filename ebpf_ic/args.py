@@ -1,6 +1,32 @@
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *  File:
+# *        args.py
+# *
+# *  Library:
+# *        ebpf_ic/
+# *
+# *  Author:
+# *        Lucas Duarte (lucas.f.duarte@ufv.br)
+# *
+# *  Description:
+# *        Management and standardization of input arguments
+# *
+
 from data import *
 
 def validateArgs(args):
+    """
+    Manages all input arguments.
+
+    Args:
+        args: list of arguments received from command line.
+
+    Returns:
+        int: standardized list of arguments.
+
+    Raises:
+        None
+    """
 
     # Initial verifications:
     del args[0]
@@ -43,6 +69,19 @@ def validateArgs(args):
     return backArgs
 
 def helpArgs():
+    """
+    Shows a tutorial list of arguments.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
+
     print("usage: ebpf_ic.py [--hex] [--bin] [--apart] [--unique] [input.ext] [output.ext]")
     print("       where:")
     for a in args_set:

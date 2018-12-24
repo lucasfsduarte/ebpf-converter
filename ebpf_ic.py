@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# *  File:
+# *        ebpf_ic.py
+# *
+# *  Library:
+# *        ebpf_ic/
+# *
+# *  Author:
+# *        Lucas Duarte (lucas.f.duarte@ufv.br)
+# *
+# *  Description:
+# *        Script file responsible for receive all the parameters from
+# *        command line and start the conversion proccess.
+# *
 
 import sys
 
