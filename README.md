@@ -25,7 +25,7 @@ Use `./ebpf_ic.py` with the following parameters to get a file (in the desired e
 
 2. Using `--hex` and `--unique`
 
-**input:** `add r0, 0x20`; **output:** `0x1400000007`
+**input:** `add r0, 0x20`; **output:** `0x0000002000000007`
 
 ### Syntax
 
