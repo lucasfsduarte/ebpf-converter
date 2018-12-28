@@ -14,14 +14,13 @@
 
 from data import *
 
-def completeBinary(string, n, signal=0):
+def completeBinary(string, n):
     """
-    Complete a bit sequence with n - bits zeroes
+    Complete a bit sequence with n - bits zeroes or ones
 
     Args:
         string: a binary sequence;
-        n: size of the pretended total sequence;
-        signal: positive (0) or negative (1) sequence (two's complement).
+        n: size of the pretended total sequence.
 
     Returns:
         strset: completed sequence.
@@ -32,8 +31,8 @@ def completeBinary(string, n, signal=0):
 
     size = len(string)
     if size > n: print("ebpf_ic: warning: possible overflow detected")
-    if signal == 0: bit = '0'
-    elif signal == 1: bit = '1'
+    if string.startswith('0'): bit = '0'
+    elif string.startswith('1'): bit = '1'
     bits = bit * (n - size)
     strset = bits + string
     return strset
@@ -53,12 +52,20 @@ def dataTypeConversor(data):
         None
     """
 
-    if data.startswith('-'): data = data.replace('-', '')
+    signal = 0
+    if data.startswith('-'): signal = 1; data = data.replace('-', '')
     elif data.startswith('+'): data = data.replace('+', '')
 
     if data.startswith("0x"): converted = bin(int(data[2:], 16))[2:]
     elif data.startswith("0b"): converted = data[2:]
     else: converted = bin(int(data, 10))[2:]
+
+    if signal == 1:
+        twoscompl = invertBinarySequence(converted)
+        twoscompl = bin(int(twoscompl, 2) + 1)[2:]
+        twoscompl = ('0' * (len(converted) - len(twoscompl))) + twoscompl
+        converted = '1' + twoscompl
+    else: converted = '0' + converted
 
     return converted
 
@@ -198,3 +205,24 @@ def transformHex(string):
             hexStr += hex(int(hexHlf, 2))[2:]
             hexHlf = ''
     return hexStr
+
+def invertBinarySequence(sequence):
+    """
+    Inverts a binary sequence bit to bit.
+
+    Args:
+        sequence: binary sequence to be inverted.
+
+    Returns:
+        inverted: inverted sequence.
+
+    Raises:
+        None
+    """
+
+    inverted = ''
+    for i in range(0, len(sequence)):
+        if sequence[i] == '1': inverted += '0'
+        elif sequence[i] == '0': inverted += '1'
+
+    return inverted
