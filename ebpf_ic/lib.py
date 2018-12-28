@@ -30,7 +30,7 @@ def completeBinary(string, n):
     """
 
     size = len(string)
-    if size > n: print("ebpf_ic: warning: possible overflow detected")
+    if size > (n + 1): print("ebpf_ic: warning: possible overflow detected")
     if string.startswith('0'): bit = '0'
     elif string.startswith('1'): bit = '1'
     bits = bit * (n - size)
