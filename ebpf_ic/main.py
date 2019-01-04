@@ -73,6 +73,7 @@ def writeInstructions(info, machineCode):
         None
     """
 
+    charApart = ' '
     finalMachineCode = []
     apart = info['aparted']
     hexa = info['hexadecimal']
@@ -86,12 +87,12 @@ def writeInstructions(info, machineCode):
                 i = []
                 i.append(inst[0:32])
                 i.append(inst[32:])
-                finalMachineCode.append(transformHex(i[0]) + ',' + transformHex(i[1]))
+                finalMachineCode.append(transformHex(i[0]) + charApart + transformHex(i[1]))
 
         # --apart and --bin:
         elif apart and not hexa:
             for inst in machineCode:
-                finalMachineCode.append(apartInstruction(inst, ','))
+                finalMachineCode.append(apartInstruction(inst, charApart))
 
         # --unique and --hex:
         elif not apart and hexa:
