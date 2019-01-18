@@ -5,6 +5,8 @@
 git clone --recurse-submodules https://github.com/Netronome/bpf-samples.git
 ```
 
+* Verify if the current Kernel version is at least 4.17 using `uname -a`. Follow the next step only if the current version is lower than 4.17.x.
+
 * Download and install Linux Kernel v4.17.x:
 ```
 wget -c kernel.ubuntu.com/~kernel-ppa/mainline/v4.17.1/linux-headers-4.17.1-041701_4.17.1-041701.201806111730_all.deb
