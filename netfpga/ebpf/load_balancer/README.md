@@ -27,7 +27,7 @@ chmod +x gen.sh
 make
 ./gen.sh l4lb_xdp
 ```
-* eBPF instructions will be at instructions.txt and l4lb_xdp.dis as hexadecimal netfpga pattern and ebpf assembly format, respectively.
+* eBPF instructions will be at `instructions.txt` and `l4lb_xdp.dis` as hexadecimal NetFPGA pattern and eBPF Assembly format, respectively.
 
 ------------------------------------------------------------------------------------------------------------
 ### References
