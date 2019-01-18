@@ -1,6 +1,6 @@
 # How to run Load Balancer
 
-* Download the repository with libraries:
+* Download Load Balancer repository with libraries:
 ```
 git clone --recurse-submodules https://github.com/Netronome/bpf-samples.git
 ```
