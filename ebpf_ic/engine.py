@@ -235,14 +235,15 @@ def branch_inst (op, args, line):
             if isRegValid(args[0]):
                 if isRegValid(args[1]):
                     inst.setSrc(reg_set[args[1]])
+                    inst.setOpc(branch_inst_set[op]['opcode'])
                 elif isNumericDataValid(args[1]):
                     inst.setImm(completeBinary(dataTypeConversor(args[1]), 32))
+                    inst.setOpc(branch_inst_set[op]['opcodeImm'])
                 else:
                     print("ebpf_ic: line " + str(line) + ": invalid arguments")
                     return None
                 inst.setDst(reg_set[args[0]])
                 inst.setOff(completeBinary(dataTypeConversor(args[2]), 16))
-                inst.setOpc(branch_inst_set[op]['opcode'])
             else:
                 print("ebpf_ic: line " + str(line) + ": unknown register")
                 return None
