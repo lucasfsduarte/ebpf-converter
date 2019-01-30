@@ -1,2 +1,5 @@
-sth [r1-10], 10
+mov r10, 0
+mov r6, 0xaabbccdd
+stdw [r10+0x38], r6
+mov r0, 0xFFF2
 exit

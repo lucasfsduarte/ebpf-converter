@@ -47,7 +47,8 @@ def processInstructions(inputFile):
         instruction = instruction.lower()
 
         # Define all the args (operation and parameters):
-        args = instruction.split(' ')
+        a = instruction.split(' ')
+        args = list(filter(lambda x: len(x) != 0, a))
         op = args[0]
         del args[0]
 
