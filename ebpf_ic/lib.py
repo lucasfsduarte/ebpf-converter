@@ -123,12 +123,15 @@ def isMemoryAccessValid(maccess):
     maccess = maccess.replace(' ', '')
     if maccess.find('+') != -1:
         args = maccess.split('+')
-        if args[0].startswith('['): data.append(args[0].replace('[', ''))
-        else: return None
-        if args[1].endswith(']'): data.append(args[1].replace(']', ''))
-        else: return None
-        return data
+    elif maccess.find('-') != -1:
+        args = maccess.split('-')
+        args[1] = '-' + args[1]
     else: return None
+    if args[0].startswith('['): data.append(args[0].replace('[', ''))
+    else: return None
+    if args[1].endswith(']'): data.append(args[1].replace(']', ''))
+    else: return None
+    return data
 
 def isBinary(inputString):
     """
