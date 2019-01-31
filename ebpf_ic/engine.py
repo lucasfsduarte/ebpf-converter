@@ -96,7 +96,7 @@ def byteswap_inst (op, args, line):
     else:
         if isRegValid(args[0]):
             inst.setDst(reg_set[args[0]])
-            inst.setImm(completeBinary(bin(int(byteswap_inst_set[op]['imm'], 16))[2:], 32))
+            inst.setImm(completeBinary('0' + bin(int(byteswap_inst_set[op]['imm'], 16))[2:], 32))
             inst.setOpc(byteswap_inst_set[op]['opcode'])
         else:
             print("ebpf_ic: line " + str(line) + ": " + args[0] + ": unknown register")
@@ -142,7 +142,7 @@ def memory_inst (op, args, line):
                     if isNumericDataValid(memoryArgs[1]):
                         inst.setSrc(reg_set[memoryArgs[0]])
                         inst.setDst(reg_set[args[0]])
-                        inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1]), 16))
+                        inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1], False), 16))
                         inst.setOpc(memory_inst_set[op]['opcode'])
                     else:
                         print("ebpf_ic: line " + str(line) + ": invalid offset")
@@ -160,7 +160,7 @@ def memory_inst (op, args, line):
                     if isNumericDataValid(memoryArgs[1]):
                         inst.setSrc(reg_set[args[1]])
                         inst.setDst(reg_set[memoryArgs[0]])
-                        inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1]), 16))
+                        inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1], False), 16))
                         inst.setOpc(memory_inst_set[op]['opcode'])
                     else:
                         print("ebpf_ic: line " + str(line) + ": invalid offset")
@@ -179,7 +179,7 @@ def memory_inst (op, args, line):
                         if isNumericDataValid(args[1]):
                             inst.setDst(reg_set[memoryArgs[0]])
                             inst.setImm(completeBinary(dataTypeConversor(args[1]), 32))
-                            inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1]), 16))
+                            inst.setOff(completeBinary(dataTypeConversor(memoryArgs[1], False), 16))
                             inst.setOpc(memory_inst_set[op]['opcode'])
                         else:
                             print("ebpf_ic: line " + str(line) + ": invalid immediate")
@@ -243,7 +243,7 @@ def branch_inst (op, args, line):
                     print("ebpf_ic: line " + str(line) + ": invalid arguments")
                     return None
                 inst.setDst(reg_set[args[0]])
-                inst.setOff(completeBinary(dataTypeConversor(args[2]), 16))
+                inst.setOff(completeBinary(dataTypeConversor(args[2], False), 16))
             else:
                 print("ebpf_ic: line " + str(line) + ": unknown register")
                 return None
@@ -254,7 +254,7 @@ def branch_inst (op, args, line):
     elif len(args) == 1:
         if isNumericDataValid(args[0]):
             if op == 'ja':
-                inst.setOff(completeBinary(dataTypeConversor(args[0]), 16))
+                inst.setOff(completeBinary(dataTypeConversor(args[0], False), 16))
             elif op == 'call':
                 inst.setImm(completeBinary(dataTypeConversor(args[0]), 32))
             inst.setOpc(branch_inst_set[op]['opcode'])

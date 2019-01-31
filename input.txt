@@ -1,5 +1,53 @@
-mov r10, 0
-mov r6, 0xaabbccdd
-stdw [r10+0x38], r6
-mov r0, 0xFFF2
-exit
+//23- be16-high.data
+// mov r0, 0x11223344
+// lsh r0, 32
+// mov r1, 0x55667788
+// or r0, r1
+// be16 r0
+// exit
+
+//24- be16.data
+// mov r0, 0x1122
+// be16 r0
+// exit
+
+//25- be32-high.data
+// mov r0, 0x11223344
+// lsh r0, 32
+// mov r1, 0x55667788
+// or r0, r1
+// be32  r0
+// exit
+
+//26- be32.data
+// mov r0, 0x11223344
+// be32 r0
+// exit
+
+//27- be64.data
+// mov r0, 0x11223344
+// lsh r0, 32
+// mov r1, 0x55667788
+// or r0, r1
+// be64  r0
+// exit
+
+//28- le16.data
+// mov r0, 0x2211
+// le16 r0
+// exit
+
+//29- le32.data
+// mov r0, 0x44332211
+// le32 r0
+// exit
+
+//30- le64.data
+//mov r0, 0x88776655
+// lsh r0, 32
+// mov r1, 0x44332211
+// or r0, r1
+// le64 r0
+// exit
+// mov r0, 0x8776655
+// ja 0xaaa

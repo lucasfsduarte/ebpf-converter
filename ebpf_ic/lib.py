@@ -37,13 +37,14 @@ def completeBinary(string, n):
     strset = bits + string
     return strset
 
-def dataTypeConversor(data):
+def dataTypeConversor(data, isImm=True):
     """
     Convert a numeric value with a predefined pattern from hexadecimal or decimal
     to a binary sequence.
 
     Args:
         data: a numeric value.
+        isImm: kind of value (immediate (true) or offset (false))
 
     Returns:
         converted: binary sequence equivalent to the numeric number
@@ -60,12 +61,13 @@ def dataTypeConversor(data):
     elif data.startswith("0b"): converted = data[2:]
     else: converted = bin(int(data, 10))[2:]
 
-    if signal == 1:
-        twoscompl = invertBinarySequence(converted)
-        twoscompl = bin(int(twoscompl, 2) + 1)[2:]
-        twoscompl = ('0' * (len(converted) - len(twoscompl))) + twoscompl
-        converted = '1' + twoscompl
-    else: converted = '0' + converted
+    if (isImm and len(converted) < 32) or (not isImm and len(converted) < 16):
+        if signal == 1:
+            twoscompl = invertBinarySequence(converted)
+            twoscompl = bin(int(twoscompl, 2) + 1)[2:]
+            twoscompl = ('0' * (len(converted) - len(twoscompl))) + twoscompl
+            converted = '1' + twoscompl
+        else: converted = '0' + converted
 
     return converted
 
