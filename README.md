@@ -1,4 +1,4 @@
-# eBPF Instruction Converter
+# eBPF Converter
 A complete eBPF to machine code converter.
 
 ## Usage
