@@ -1,5 +1,5 @@
 # eBPF Instruction Converter
-A simple and useful eBPF instruction converter for it equivalent code in machine language.
+A complete eBPF to machine code converter.
 
 ## Usage
 Use `./ebpf_ic.py` with the following parameters to get a file (in the desired extension) with the correspondent code in machine language.
